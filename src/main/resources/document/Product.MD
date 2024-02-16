@@ -1,0 +1,99 @@
+Các chức năng của sản phẩm
+VERSION 1:
+ - Thêm sản phẩm 
+   - API : .../products
+   - Method : POST
+   - INPUT 
+     - id                 long 
+     - productName        String
+     - imageUrl           String
+     - color              String
+     - price              double
+     - config             String 
+     - quantity           String
+     - createTime         long
+     - updateTime         long
+     - categoryId         long
+     - sale               int
+     - active             boolean 
+   - RESPONSE
+     - responseCode 
+     - message
+     - data response array
+         - id                 long
+         - productName        String
+         - imageUrl           String
+         - color              String
+         - price              double
+         - config             String
+         - quantity           String
+         - createTime         long
+         - updateTime         long
+         - categoryId         long
+         - sale               int
+         - active             boolean 
+ - Lấy danh sách sản phẩm 
+   - API : .../products
+   - Method : GET
+   - RESPONSE
+       - responseCode
+       - message
+       - data response
+           - id                 long
+           - productName        String
+           - imageUrl           String
+           - color              String
+           - price              double
+           - config             String
+           - quantity           String
+           - createTime         long
+           - updateTime         long
+           - categoryId         long
+           - sale               int
+           - active             boolean 
+ - Lấy chi tiết sản phẩm 
+   - API : .../product/{id}
+   - Method : GET
+   - RESPONSE 
+       - responseCode
+       - message
+       - data response
+           - id                 long
+           - productName        String
+           - imageUrl           String
+           - color              String
+           - price              double
+           - config             String
+           - quantity           String
+           - createTime         long
+           - updateTime         long
+           - categoryId         long
+           - sale               int
+           - active             boolean
+ - Cập nhật sản phẩm 
+     - API : .../product/{id}
+     - Method : PUT
+     - RESPONSE
+         - responseCode
+         - message
+         - data response
+             - id                 long
+             - productName        String
+             - imageUrl           String
+             - color              String
+             - price              double
+             - config             String
+             - quantity           String
+             - createTime         long
+             - updateTime         long
+             - categoryId         long
+             - sale               int
+             - active             boolean
+ - Xóa sản phẩm 
+   - API : .../product/{id}
+   - Method : DELETE
+   - RESPONSE 
+     - responseCode
+     - message
+     - data response 
+       - id                       long
