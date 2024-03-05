@@ -2,17 +2,16 @@ package com.dev.custom.controller;
 
 import com.dev.custom.exception.ReadFileException;
 import com.dev.custom.service.FileServiceImpl;
+import com.dev.custom.service.data.response.Response;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -24,6 +23,8 @@ import java.util.List;
 
 @RestController
 public class FileController {
+    @Autowired
+    FileServiceImpl fileService;
 
     @PostMapping("upload")
     public List<List<String>> uploadExcel(@RequestBody MultipartFile file) throws IOException {
@@ -74,8 +75,12 @@ public class FileController {
     }
 
     @PostMapping("/images")
-    public ResponseEntity<String> uploadImage(@RequestBody MultipartFile file) throws IOException {
-        FileServiceImpl fileService = new FileServiceImpl();
-        return ResponseEntity.ok(fileService.saveImage(file));
+    public Response<Object> uploadImage(@ModelAttribute MultipartFile file) throws IOException {
+        return fileService.uploadFile(file);
+    }
+
+    @DeleteMapping("image/{id}")
+    private boolean delete(@PathVariable("id") String imageId) throws IOException {
+        return fileService.deleteImageFile(imageId);
     }
 }

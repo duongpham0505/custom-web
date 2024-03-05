@@ -1,5 +1,6 @@
 package com.dev.custom.service;
 
+import com.dev.custom.constant.Constant;
 import com.dev.custom.repository.CategoryRepository;
 import com.dev.custom.repository.ProductRepository;
 import com.dev.custom.service.data.dto.ProductDTO;
@@ -70,8 +71,8 @@ public class ProductServiceImpl implements ProductService {
         for (Product product : products) {
             productDTOList.add(modelMapper.map(product, ProductDTO.class));
         }
-        results.put("Category", category);
-        results.put("Product", productDTOList);
+        results.put(Constant.CATEGORY, category);
+        results.put(Constant.PRODUCT_LIST, productDTOList);
         return results;
     }
 

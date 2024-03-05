@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "categories")
+@Table(name = "tbl_category")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,30 +1,42 @@
 package com.dev.custom.service;
 
-import com.dev.custom.service.data.dto.Image;
-import com.google.gson.Gson;
-import org.apache.tomcat.util.codec.binary.Base64;
+import com.cloudinary.Cloudinary;
+import com.dev.custom.service.data.response.Response;
+import com.dev.custom.service.port.FileCloudinary;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
-public class FileServiceImpl {
+@Service
+public class FileServiceImpl implements FileCloudinary {
 
-    public String saveImage(MultipartFile file) throws IOException {
-        UUID uuId = UUID.randomUUID();
-        Image image = new Image();
-        image.setId(uuId.toString());
-        image.setFileName(file.getOriginalFilename());
-        image.setData(Base64.encodeBase64String(file.getBytes()));
-        Gson gson = new Gson();
-        String base64 = gson.toJson(image);
-        try (FileWriter writer = new FileWriter("L:\\dev-web\\src\\main\\resources\\file\\image.json")) {
-            writer.write(base64);
-            System.out.println("File saved successfully.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return base64;
+    private final Cloudinary cloudinary;
+
+    public FileServiceImpl(Cloudinary cloudinary) {
+        this.cloudinary = cloudinary;
+    }
+
+    @Override
+    public Response<Object> uploadFile(MultipartFile multipartFile) throws IOException {
+        String uId = UUID.randomUUID().toString();
+        String urlImage =  cloudinary.uploader()
+                .upload(multipartFile.getBytes(),
+                        Map.of("`public_id`", uId))
+                .get("url")
+                .toString();
+        Map<String, String> results = new HashMap<>();
+        results.put("id", uId);
+        results.put("imageUrl", urlImage);
+        return Response.builder().object(results).code("200").build();
+    }
+
+    @Override
+    public boolean deleteImageFile(String id) throws IOException {
+        cloudinary.uploader().destroy(id, new HashMap<>());
+        return true;
     }
 }
