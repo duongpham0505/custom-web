@@ -22,15 +22,15 @@ public class CategoryController {
         return categoryService.insertCategory(categoryDTO);
     }
 
+    @GetMapping("category_findAll")
+    public Map<String, Object> getAllCategory() {
+        return categoryService.getAllCategories();
+    }
+
     @GetMapping("{id}/categories")
     public Map<String, Object> getCategories(@PathVariable("id") long id,
                                              @RequestParam int pageNo,
                                              @RequestParam int pageSize) {
         return categoryService.getCategories(id, pageNo, pageSize);
-    }
-
-    @GetMapping("category_findAll")
-    public Map<String, Object> getAllCategory() {
-        return categoryService.getAllCategories();
     }
 }
