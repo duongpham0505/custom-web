@@ -1,0 +1,12 @@
+FROM openjdk:11.0.10-oracle
+
+COPY target/dev-web-1.0.0.jar dev-web-1.0.0.jar
+
+ENTRYPOINT ["java","-jar","/dev-web-1.0.0.jar"]
+
+WORKDIR /app
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+RUN ./mvnw dependency:go-offline
+COPY src ./src
+CMD ["./mvnw", "spring-boot:run"]
