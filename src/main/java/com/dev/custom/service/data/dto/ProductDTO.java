@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class ProductDTO {
     private long id;
     private String productName;
+    private String manufacturer;
     private String imageUrl;
     private String description;
     private String color;
@@ -23,12 +24,4 @@ public class ProductDTO {
     private long updateTime;
     private long categoryId;
     private int sale;
-
-    public ProductDTO(String productName, String imageUrl, String description, String color, double price) {
-        this.productName = productName;
-        this.imageUrl = imageUrl;
-        this.description = description;
-        this.color = color;
-        this.price = price;
-    }
 }

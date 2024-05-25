@@ -99,4 +99,9 @@ public class ProductServiceImpl implements ProductService {
     public int totalProduct() {
         return productRepository.total();
     }
+
+    @Override
+    public Map<String, Object> getProductHome() {
+        return null;
+    }
 }

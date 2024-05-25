@@ -1,37 +1,32 @@
 package com.dev.custom.service.data.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.util.Set;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Getter
+@Setter
 @Entity
-@Table(name = "tbl_products")
-public class Product {
+@Table(name = "tbl_roles")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String productName;
-    private String manufacturer;
-    private String imageUrl;
+    private String roleName;
+    private String roleCode;
     private String description;
-    private String color;
-    private double price;
-    private String config;
-    private int quantity;
-    private int status;
-    private long createTime;
-    private long updateTime;
-    private long categoryId;
-    private int sale;
+
+    @ManyToMany(mappedBy = "roles")
+    private Set<UserEntity> userEntities;
 }

@@ -76,11 +76,13 @@ public class FileController {
 
     @PostMapping("/images")
     public Response<Object> uploadImage(@ModelAttribute MultipartFile file) throws IOException {
-        return fileService.uploadFile(file);
+//        return fileService.uploadFile(file);
+        return null;
     }
 
     @DeleteMapping("image/{id}")
     private boolean delete(@PathVariable("id") String imageId) throws IOException {
-        return fileService.deleteImageFile(imageId);
+        return false;
+//        return fileService.deleteImageFile(imageId);
     }
 }

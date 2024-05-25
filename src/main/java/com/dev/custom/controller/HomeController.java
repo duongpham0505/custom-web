@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class HomeController {
@@ -25,4 +26,15 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("header")
+    public String viewHeader(Model model) {
+        List<ProductDTO> getProducts = productService.getProducts(10, 0);
+        model.addAttribute("products", getProducts);
+//        if (getProducts != null && !getProducts.isEmpty()) {
+//            List<String> manufacturers = getProducts.stream().map(ProductDTO::getManufacturer).collect(Collectors.toList());
+//            model.addAttribute("manufacturer", manufacturers);
+//        }
+        model.addAttribute("manufacturer", List.of("Apple", "Samsung", "Huawei", "Oppo"));
+        return "header/header";
+    }
 }

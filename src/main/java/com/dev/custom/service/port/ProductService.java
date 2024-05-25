@@ -19,4 +19,6 @@ public interface ProductService {
     boolean deleteProduct(long productId);
 
     int totalProduct();
+
+    Map<String, Object> getProductHome();
 }
